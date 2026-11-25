@@ -58,7 +58,7 @@ public class ClientScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
-        field.render(c, this.width, this.height);
+        // celowo puste (bez rozmycia vanilla) - tlo rysujemy w render()
     }
 
     // ---------- pomocnicze ----------
@@ -106,6 +106,8 @@ public class ClientScreen extends Screen {
 
     @Override
     public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+        field.render(c, this.width, this.height);
+
         long now = System.nanoTime();
         float dt = Math.min(0.1f, (now - last) / 1e9f);
         last = now;

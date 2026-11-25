@@ -21,6 +21,7 @@ import pl.szybki.client.gui.ClientScreen;
 
 public class SzybkiClient implements ClientModInitializer {
     private static KeyBinding menuKey, saveKey, restoreKey;
+    private static boolean rshiftPrev = false;
 
     @Override
     public void onInitializeClient() {
@@ -38,6 +39,12 @@ public class SzybkiClient implements ClientModInitializer {
             while (menuKey.wasPressed()) {
                 if (mc.currentScreen == null) mc.setScreen(new ClientScreen());
             }
+            // zapasowe wykrywanie PRAWEGO SHIFTA (gdy klawisz nie jest przestawiony w opcjach)
+            boolean rs = InputUtil.isKeyPressed(mc.getWindow().getHandle(), GLFW.GLFW_KEY_RIGHT_SHIFT);
+            if (rs && !rshiftPrev && mc.currentScreen == null && menuKey.isDefault()) {
+                mc.setScreen(new ClientScreen());
+            }
+            rshiftPrev = rs;
             while (saveKey.wasPressed()) ModuleManager.ANTYKOSTKA.save();
             while (restoreKey.wasPressed()) ModuleManager.ANTYKOSTKA.restore();
         });
