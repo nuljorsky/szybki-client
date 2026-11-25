@@ -61,7 +61,7 @@ public class BlockEsp extends Module {
         boolean ores = b("ores"), chests = b("chests"), spawners = b("spawners");
         BlockPos c = mc.player.getBlockPos();
         int minY = Math.max(mc.world.getBottomY(), c.getY() - r);
-        int maxY = Math.min(mc.world.getTopY() - 1, c.getY() + r);
+        int maxY = Math.min(mc.world.getBottomY() + mc.world.getHeight() - 1, c.getY() + r);
         List<Hit> found = new ArrayList<>();
         BlockPos.Mutable pos = new BlockPos.Mutable();
         for (int x = c.getX() - r; x <= c.getX() + r; x++) {
