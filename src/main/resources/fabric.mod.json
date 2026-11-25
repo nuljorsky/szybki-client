@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "szybkiclient",
+  "version": "${version}",
+  "name": "SZYBKI CLIENT",
+  "description": "SZYBKI CLIENT - Minecraft 1.21.4 Fabric client",
+  "authors": ["SZYBKI TEAM"],
+  "license": "All-Rights-Reserved",
+  "icon": "assets/szybkiclient/icon.png",
+  "environment": "client",
+  "entrypoints": { "client": ["pl.szybki.client.SzybkiClient"] },
+  "mixins": ["szybkiclient.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

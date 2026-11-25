@@ -1,0 +1,14 @@
+package pl.szybki.client.mixin;
+
+import net.minecraft.client.MinecraftClient;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+@Mixin(MinecraftClient.class)
+public interface MinecraftClientAccessor {
+    @Accessor("itemUseCooldown")
+    int szybki$getItemUseCooldown();
+
+    @Accessor("itemUseCooldown")
+    void szybki$setItemUseCooldown(int value);
+}
