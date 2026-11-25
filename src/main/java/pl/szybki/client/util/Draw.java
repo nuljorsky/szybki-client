@@ -16,8 +16,25 @@ public final class Draw {
         return MinecraftClient.getInstance().textRenderer;
     }
 
+    private static int fontState = 0; // 0 = nieznany, 1 = wlasna czcionka dziala, 2 = nie dziala
+
+    /** Sprawdza, czy wlasna czcionka sie wczytala (gdy nie, wszystkie znaki to kwadraty o tej samej szerokosci). */
+    private static boolean fontOk() {
+        if (fontState == 0) {
+            try {
+                Style st = Style.EMPTY.withFont(FONT);
+                int a = tr().getWidth(Text.literal("i").setStyle(st));
+                int b = tr().getWidth(Text.literal("W").setStyle(st));
+                fontState = (a != b) ? 1 : 2;
+            } catch (Throwable t) {
+                fontState = 2;
+            }
+        }
+        return fontState == 1;
+    }
+
     public static Text styled(String s, boolean bold) {
-        Style st = Style.EMPTY.withFont(FONT);
+        Style st = fontOk() ? Style.EMPTY.withFont(FONT) : Style.EMPTY;
         if (bold) st = st.withBold(true);
         return Text.literal(s).setStyle(st);
     }
